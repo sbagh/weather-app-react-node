@@ -22,7 +22,7 @@ function App() {
       }
    };
 
-   // build date for the date function above
+   // build date for the date function below
    const dateBuilder = (d) => {
       const months = [
          "January",
