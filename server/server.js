@@ -11,11 +11,13 @@ const PORT = 5200;
 const params = {
    api_key: "7F525C04644343019A81D3BD83C6476C",
    search_type: "images",
+   images_size: "large",
 };
 
-// app.get("/", (req, res) => {
-//    res.send("app working");
-// });
+// test if app is working
+app.get("/", (req, res) => {
+   res.send("app working");
+});
 
 // convert current hour to daylight (sunrise/day/evening/night)
 function daytime() {
@@ -39,11 +41,13 @@ function daytime() {
    return daylight;
 }
 
+
 //function to build the search parameters
 function createSearchString(city, country, weatherForecast) {
    let daylight = daytime();
    return `${city}, ${country} ${weatherForecast} ${daylight}`;
 }
+
 
 //function to search images on google using Scale Serp API
 const searchImage = async (searchString) => {

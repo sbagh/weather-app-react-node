@@ -12,7 +12,7 @@ function App() {
    //openweatherAPI results
    const [weather, setWeather] = useState({});
 
-   //function which takes the user searched city and fetches the weather results
+   //function takes the user's searched city and fetches the weather results
    const search = (evt) => {
       if (evt.key === "Enter") {
          fetch(`${api.base}weather?q=${query}&units=metric&&appid=${api.key}`)
@@ -40,7 +40,7 @@ function App() {
                setBackgroundImage(data.image);
             });
       }
-   });
+   }, [weather]);
 
    // build date for the date function below
    const dateBuilder = (d) => {
@@ -77,7 +77,17 @@ function App() {
    };
 
    return (
-      <div className="app">
+      <div
+         className="app"
+         style={{
+            backgroundImage: `url(${img})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            width: "100vw",
+            height: "100vh",
+         }}
+      >
          <main>
             <div className="search-box">
                <input
@@ -103,7 +113,6 @@ function App() {
                         {weather.weather[0].description}
                      </div>
                   </div>
-                  <img width={"100%"} height={"100%"} src={img} />
                </div>
             ) : (
                ""

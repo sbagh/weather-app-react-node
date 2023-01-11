@@ -9,7 +9,7 @@ body {
 }
 
 .app {
-   background-image: url(./assets/brightToronto.jpeg);
+   /* background-image: url(./assets/brightToronto.jpeg); */
    background-size: cover;
    background-position: bottom;
    transition: 0.4 ease-out;
