@@ -6,7 +6,10 @@ const api = {
 };
 
 function App() {
+   //searchbar query/setQuery
    const [query, setQuery] = useState("");
+
+   //openweatherAPI results
    const [weather, setWeather] = useState({});
 
    //function which takes the user searched city and fetches the weather results
@@ -21,6 +24,23 @@ function App() {
             });
       }
    };
+
+   //chaning the background image that is sent from backend(server.js)
+   const [img, setBackgroundImage] = useState("");
+
+   useEffect(() => {
+      if (weather.name && weather.main && weather.sys) {
+         fetch(
+            `http://localhost:5200/getImage?city=${weather.name}&country=${weather.sys.country}&weatherForecast=${weather.weather[0].description}`
+         )
+            .then((res) => res.json())
+            .then((data) => {
+               console.log(img);
+               console.log(data);
+               setBackgroundImage(data.image);
+            });
+      }
+   });
 
    // build date for the date function below
    const dateBuilder = (d) => {
@@ -83,6 +103,7 @@ function App() {
                         {weather.weather[0].description}
                      </div>
                   </div>
+                  <img width={"100%"} height={"100%"} src={img} />
                </div>
             ) : (
                ""
