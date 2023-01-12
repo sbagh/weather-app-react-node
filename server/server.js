@@ -25,7 +25,7 @@ function daytime() {
    let daylight = "";
 
    switch (true) {
-      case hour > 5 && hour <= 6:
+      case hour >= 5 && hour <= 6:
          daylight = "sunrise";
          break;
       case hour > 6 && hour <= 11:
@@ -34,13 +34,13 @@ function daytime() {
       case hour > 11 && hour <= 3:
          daylight = "noon";
          break;
-      case hour > 3 && hour < 5:
+      case hour > 3 && hour <= 5:
          daylight = "afternoon";
          break;
-      case hour > 5 && hour < 7:
+      case hour > 5 && hour <= 7:
          daylight = "evening";
          break;
-      case hour > 7 && hour < 8:
+      case hour > 7 && hour <= 8:
          daylight = "sunset";
          break;
       default:
@@ -62,7 +62,7 @@ const searchImage = async (searchString) => {
       params: { ...params, q: searchString },
    });
 
-   return response.data.image_results[0];
+   return response.data.image_results[2];
 };
 
 // respond to fetched data from client: create searchString then pass it to the searchImage function
