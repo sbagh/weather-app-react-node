@@ -7,9 +7,9 @@ app.use(cors());
 
 const PORT = 5200;
 
-// set up the request parameters
+// set up the request parameters for scale serp api
 const params = {
-   api_key: "7F525C04644343019A81D3BD83C6476C",
+   api_key: "CEC342695AFD4BAE8DAA0A4AA93EEB14",
    search_type: "images",
    images_size: "large",
 };
@@ -28,11 +28,20 @@ function daytime() {
       case hour > 5 && hour <= 6:
          daylight = "sunrise";
          break;
-      case hour > 6 && hour <= 17:
-         daylight = "day";
+      case hour > 6 && hour <= 11:
+         daylight = "morning";
          break;
-      case hour > 17 && hour < 19:
+      case hour > 11 && hour <= 3:
+         daylight = "noon";
+         break;
+      case hour > 3 && hour < 5:
+         daylight = "afternoon";
+         break;
+      case hour > 5 && hour < 7:
          daylight = "evening";
+         break;
+      case hour > 7 && hour < 8:
+         daylight = "sunset";
          break;
       default:
          daylight = "night";
@@ -41,13 +50,11 @@ function daytime() {
    return daylight;
 }
 
-
 //function to build the search parameters
 function createSearchString(city, country, weatherForecast) {
    let daylight = daytime();
    return `${city}, ${country} ${weatherForecast} ${daylight}`;
 }
-
 
 //function to search images on google using Scale Serp API
 const searchImage = async (searchString) => {
@@ -57,7 +64,6 @@ const searchImage = async (searchString) => {
 
    return response.data.image_results[0];
 };
-
 
 // respond to fetched data from client: create searchString then pass it to the searchImage function
 app.get("/getImage", async (req, res) => {
